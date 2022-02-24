@@ -1,5 +1,5 @@
-from __future__ import absolute_import, unicode_literals
-from .py3_utils import python_2_unicode_compatible, IterableUserDict
+
+from .py3_utils import IterableUserDict, python_2_unicode_compatible
 
 
 @python_2_unicode_compatible

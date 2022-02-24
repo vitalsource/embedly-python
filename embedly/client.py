@@ -4,11 +4,12 @@ Client
 
 The embedly object that interacts with the service
 """
-from __future__ import absolute_import, unicode_literals
-import re
-import httplib2
+
 import json
-from urllib import quote, urlencode
+import re
+from urllib.parse import quote, urlencode
+
+import httplib2
 
 from .models import Url
 
@@ -142,8 +143,8 @@ class Embedly(object):
                     'error_code': int(resp['status'])}
 
         if multi:
-            return map(lambda url, data: Url(data, method, url),
-                       url_or_urls, data)
+            return list(map(lambda url, data: Url(data, method, url),
+                       url_or_urls, data))
 
         return Url(data, method, url_or_urls)
 
