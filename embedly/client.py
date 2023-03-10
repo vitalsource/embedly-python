@@ -138,9 +138,16 @@ class Embedly(object):
             if kwargs.get('raw', False):
                 data['raw'] = content
         else:
+            try:
+                resp_body = json.loads(content.decode('utf-8'))
+            except:
+                resp_body = {}
+
             data = {'type': 'error',
                     'error': True,
-                    'error_code': int(resp['status'])}
+                    'error_code': int(resp['status']),
+                    'error_message': resp_body.get("error_message"),
+                    }
 
         if multi:
             return list(map(lambda url, data: Url(data, method, url),
